@@ -9,6 +9,7 @@ import { OrderModule } from './order/order.module';
 import { WishlistItemModule } from './wishlist-item/wishlist-item.module';
 import { ReviewModule } from './review/review.module';
 import { LikeModule } from './like/like.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { LikeModule } from './like/like.module';
     WishlistItemModule,
     ReviewModule,
     LikeModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
