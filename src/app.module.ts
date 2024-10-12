@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
-import { CartItem,Module } from './order-item,/cart-item,/cart-item,.module';
 import { CartItemModule } from './cart-item/cart-item.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { OrderModule } from './order/order.module';
@@ -26,7 +25,12 @@ import { LikeModule } from './like/like.module';
     UserModule,
     ProductModule,
     CategoryModule,
-    CartItem,Module, CartItemModule, OrderItemModule, OrderModule, WishlistItemModule, ReviewModule, LikeModule,
+    CartItemModule,
+    OrderItemModule,
+    OrderModule,
+    WishlistItemModule,
+    ReviewModule,
+    LikeModule,
   ],
   controllers: [],
   providers: [],
