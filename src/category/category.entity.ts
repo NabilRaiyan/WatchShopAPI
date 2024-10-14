@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
+// Creating categories entity
 @Entity('categories')
 export class CategoryEntity {
   @PrimaryGeneratedColumn()
