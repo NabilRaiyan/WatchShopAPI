@@ -13,7 +13,7 @@ export class AuthService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  // Sign up
+  // Sign up method
   async signUp(authDto: AuthDto): Promise<UserEntity> {
     const isUserExist = await this.userRepository.findOne({
       where: {
