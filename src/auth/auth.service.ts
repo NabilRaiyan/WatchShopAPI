@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
 
+// Auth service
 @Injectable()
 export class AuthService {
   constructor(
