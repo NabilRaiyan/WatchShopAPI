@@ -10,6 +10,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 
+// Creating orders items entity
+
 @Entity('orderItems')
 export class OrderItemEntity {
   @PrimaryGeneratedColumn()
