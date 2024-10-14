@@ -9,6 +9,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
+// Creating cart items entity
 @Entity('cartItems')
 export class CartItemEntity {
   @PrimaryGeneratedColumn()
