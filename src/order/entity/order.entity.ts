@@ -16,6 +16,8 @@ export enum OrderStatus {
   CANCELED = 'CANCELED',
 }
 
+// Creating orders entity
+
 @Entity('orders')
 export class OrderEntity {
   @PrimaryGeneratedColumn()
