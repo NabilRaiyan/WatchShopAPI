@@ -9,6 +9,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 
+// Creating like entity
+
 @Entity('likes')
 export class LikeEntity {
   @PrimaryGeneratedColumn()
