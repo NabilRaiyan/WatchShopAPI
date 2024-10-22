@@ -44,7 +44,27 @@ export class AuthService {
   }
 
   // Sign in method
-  async SignIn(signINDto: SignInDto): Promise<UserEntity> {
-    
+
+  async SignIn(signInDto: SignInDto): Promise<UserEntity | null> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email: signInDto.email,
+      },
+    });
+
+    if (!user) {
+      throw new Error('Invalid email or password');
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      signInDto.password,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new Error('Invalid email or password');
+    }
+
+    return user;
   }
 }
