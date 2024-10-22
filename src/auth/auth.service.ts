@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/user/entity';
 import { Repository } from 'typeorm';
@@ -53,7 +57,7 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new Error('Invalid email or password');
+      throw new NotFoundException('Invalid email or password');
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -62,7 +66,7 @@ export class AuthService {
     );
 
     if (!isPasswordValid) {
-      throw new Error('Invalid email or password');
+      throw new NotFoundException('Invalid email or password');
     }
 
     return user;
