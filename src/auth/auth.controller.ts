@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
+import { SignInDto } from './dto/signinDto';
 
 @Controller('auth')
 export class AuthController {
@@ -19,5 +20,11 @@ export class AuthController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async signUp(@Body() authDto: AuthDto) {
     return this.authService.signUp(authDto);
+  }
+
+  @Post('signin')
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async signIn(@Body() signInDto: SignInDto) {
+    return this.authService.SignIn(signInDto);
   }
 }

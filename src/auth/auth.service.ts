@@ -4,6 +4,7 @@ import { UserEntity } from 'src/user/entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
+import { SignInDto } from './dto/signinDto';
 
 // Auth service
 @Injectable()
@@ -40,5 +41,10 @@ export class AuthService {
     delete newUser.password;
 
     return newUser;
+  }
+
+  // Sign in method
+  async SignIn(signINDto: SignInDto): Promise<UserEntity> {
+    
   }
 }
