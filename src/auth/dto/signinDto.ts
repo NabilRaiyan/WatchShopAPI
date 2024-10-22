@@ -7,5 +7,7 @@ export class SignInDto {
     message: 'Email must be a valid Gmail address',
   })
   email: string;
-  
+
+  @IsNotEmpty({ message: 'Please enter password' })
+  password: string;
 }
