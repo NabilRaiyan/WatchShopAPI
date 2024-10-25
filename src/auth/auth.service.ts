@@ -51,7 +51,7 @@ export class AuthService {
     await this.userRepository.save(newUser);
     delete newUser.password;
 
-    const payload = { user: user.id, email: user.email };
+    const payload = { userId: user.id, email: user.email };
     const accessToken = await this.jwtService.signAsync(payload);
     delete newUser.password;
     return {
@@ -82,7 +82,7 @@ export class AuthService {
       throw new NotFoundException('Invalid email or password');
     }
 
-    const payload = { user: user.id, email: user.email };
+    const payload = { userId: user.id, email: user.email };
 
     const accessToken = await this.jwtService.signAsync(payload);
     delete user.password;
