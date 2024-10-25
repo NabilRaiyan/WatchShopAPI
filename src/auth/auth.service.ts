@@ -11,8 +11,8 @@ import { AuthDto } from './dto/auth.dto';
 import { SignInDto } from './dto/signinDto';
 import { JwtService } from '@nestjs/jwt';
 
-export interface signInResponse {
-  user: UserEntity;
+export interface SignInResponse {
+  user: { user_id: number; user_name: string; user_email: string };
   accessToken: string;
 }
 
@@ -26,7 +26,7 @@ export class AuthService {
   ) {}
 
   // Sign up method
-  async signUp(authDto: AuthDto): Promise<signInResponse> {
+  async signUp(authDto: AuthDto): Promise<SignInResponse> {
     const isUserExist = await this.userRepository.findOne({
       where: {
         email: authDto.email,
@@ -34,7 +34,7 @@ export class AuthService {
     });
 
     if (isUserExist) {
-      throw new ConflictException('User already exist');
+      throw new ConflictException('User already exists');
     }
 
     // Create a new UserEntity instance
@@ -47,22 +47,23 @@ export class AuthService {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(authDto.password, salt);
 
-    const newUser = this.userRepository.create(user);
-    await this.userRepository.save(newUser);
-    delete newUser.password;
+    const newUser = await this.userRepository.save(user);
 
-    const payload = { userId: user.id, email: user.email };
+    const payload = { userId: newUser.id, email: newUser.email };
     const accessToken = await this.jwtService.signAsync(payload);
-    delete newUser.password;
+
     return {
-      user: newUser,
+      user: {
+        user_id: newUser.id,
+        user_name: newUser.name,
+        user_email: newUser.email,
+      },
       accessToken,
     };
   }
 
   // Sign in method
-
-  async SignIn(signInDto: SignInDto): Promise<signInResponse | null> {
+  async signIn(signInDto: SignInDto): Promise<SignInResponse> {
     const user = await this.userRepository.findOne({
       where: {
         email: signInDto.email,
@@ -83,11 +84,10 @@ export class AuthService {
     }
 
     const payload = { userId: user.id, email: user.email };
-
     const accessToken = await this.jwtService.signAsync(payload);
-    delete user.password;
+
     return {
-      user,
+      user: { user_id: user.id, user_name: user.name, user_email: user.email },
       accessToken,
     };
   }
