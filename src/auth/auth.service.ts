@@ -9,6 +9,12 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
 import { SignInDto } from './dto/signinDto';
+import { JwtService } from '@nestjs/jwt';
+
+export interface signInResponse {
+  user: UserEntity;
+  accessToken: string;
+}
 
 // Auth service
 @Injectable()
@@ -16,10 +22,11 @@ export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    private jwtService: JwtService,
   ) {}
 
   // Sign up method
-  async signUp(authDto: AuthDto): Promise<UserEntity> {
+  async signUp(authDto: AuthDto): Promise<signInResponse> {
     const isUserExist = await this.userRepository.findOne({
       where: {
         email: authDto.email,
@@ -44,12 +51,18 @@ export class AuthService {
     await this.userRepository.save(newUser);
     delete newUser.password;
 
-    return newUser;
+    const payload = { user: user.id, email: user.email };
+    const accessToken = await this.jwtService.signAsync(payload);
+    delete newUser.password;
+    return {
+      user: newUser,
+      accessToken,
+    };
   }
 
   // Sign in method
 
-  async SignIn(signInDto: SignInDto): Promise<UserEntity | null> {
+  async SignIn(signInDto: SignInDto): Promise<signInResponse | null> {
     const user = await this.userRepository.findOne({
       where: {
         email: signInDto.email,
@@ -69,6 +82,13 @@ export class AuthService {
       throw new NotFoundException('Invalid email or password');
     }
 
-    return user;
+    const payload = { user: user.id, email: user.email };
+
+    const accessToken = await this.jwtService.signAsync(payload);
+    delete user.password;
+    return {
+      user,
+      accessToken,
+    };
   }
 }
