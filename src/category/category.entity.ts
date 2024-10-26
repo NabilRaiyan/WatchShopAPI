@@ -17,6 +17,8 @@ export class CategoryEntity {
   name: string;
   @Column()
   description: string;
+  @Column()
+  totalProducts: number;
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()

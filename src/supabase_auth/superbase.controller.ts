@@ -25,7 +25,7 @@ export class UploadController {
     }),
   )
   async uploadImage(@UploadedFile() file: Express.Multer.File) {
-    console.log('Received file:', file); // Check if file is correctly received
+    // console.log('Received file:', file); // Check if file is correctly received
     const imageUrl = await this.supabaseService.uploadImage(file);
     return { imageUrl };
   }

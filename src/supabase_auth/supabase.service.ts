@@ -14,7 +14,7 @@ export class SupabaseService {
   }
 
   async uploadImage(file: Express.Multer.File): Promise<string> {
-    const { data, error } = await this.supabase.storage
+    const { error } = await this.supabase.storage
       .from('watch_images')
       .upload(`public/${file.originalname}`, file.buffer, {
         contentType: file.mimetype,
@@ -25,11 +25,11 @@ export class SupabaseService {
       console.error('Supabase error:', error); // Log the error
       throw new Error(`Upload failed: ${error.message}`);
     }
-
+    const twoYearsInSeconds = 2 * 365 * 24 * 60 * 60; // 2 years in seconds
     // Generate the public URL
     const { data: signedURLData, error: urlError } = await this.supabase.storage
       .from('watch_images')
-      .createSignedUrl(`public/${file.originalname}`, 60 * 60 * 24); // Expires in 24 hours
+      .createSignedUrl(`public/${file.originalname}`, twoYearsInSeconds); // Expires in 24 hours
 
     if (urlError) {
       console.error('Error generating signed URL:', urlError.message);
@@ -37,7 +37,7 @@ export class SupabaseService {
     }
 
     // Log and return the signed URL
-    console.log(signedURLData.signedUrl);
+    // console.log(signedURLData.signedUrl);
     return signedURLData.signedUrl;
   }
 }

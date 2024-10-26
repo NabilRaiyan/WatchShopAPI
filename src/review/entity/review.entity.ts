@@ -15,6 +15,8 @@ export class ReviewEntity {
   id: number;
   @Column()
   content: string;
+  @Column({ type: 'float' })
+  rating: number;
   @Column()
   userId: number;
   @Column()
