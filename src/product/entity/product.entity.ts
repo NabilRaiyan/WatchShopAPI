@@ -58,6 +58,8 @@ export class ProductEntity {
   @Column()
   categoryId: number;
   @UpdateDateColumn()
+  @Column()
+  brandId: number;
   updatedAt: Date;
 
   @OneToMany(() => ProductImageEntity, (productImg) => productImg.product)

@@ -25,19 +25,19 @@ export class SupabaseService {
       console.error('Supabase error:', error); // Log the error
       throw new Error(`Upload failed: ${error.message}`);
     }
+
     const twoYearsInSeconds = 2 * 365 * 24 * 60 * 60; // 2 years in seconds
-    // Generate the public URL
     const { data: signedURLData, error: urlError } = await this.supabase.storage
       .from('watch_images')
-      .createSignedUrl(`public/${file.originalname}`, twoYearsInSeconds); // Expires in 24 hours
+      .createSignedUrl(`public/${file.originalname}`, twoYearsInSeconds);
 
     if (urlError) {
       console.error('Error generating signed URL:', urlError.message);
       throw new Error(`Signed URL generation failed: ${urlError.message}`);
     }
 
-    // Log and return the signed URL
-    // console.log(signedURLData.signedUrl);
-    return signedURLData.signedUrl;
+    const signedImageUrl = signedURLData.signedUrl;
+
+    return signedImageUrl; // Return the signed URL
   }
 }

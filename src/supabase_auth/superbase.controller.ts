@@ -1,5 +1,6 @@
 // upload.controller.ts
 import {
+  BadRequestException,
   Controller,
   Post,
   UploadedFile,
@@ -26,7 +27,13 @@ export class UploadController {
   )
   async uploadImage(@UploadedFile() file: Express.Multer.File) {
     // console.log('Received file:', file); // Check if file is correctly received
+    if (!file) {
+      throw new BadRequestException(
+        'No file uploaded. Please upload an image.',
+      );
+    }
+
     const imageUrl = await this.supabaseService.uploadImage(file);
-    return { imageUrl };
+    return { image_url: imageUrl };
   }
 }

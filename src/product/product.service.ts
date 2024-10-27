@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity, ProductImageEntity } from './entity';
 import { Repository } from 'typeorm';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
-
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
+import { CreateProductDto } from './dto';
+
+export interface ProductResponse {
+  product: ProductEntity;
+  saveImage: ProductImageEntity;
+}
 
 @Injectable()
 export class ProductService {
@@ -25,7 +34,52 @@ export class ProductService {
     private readonly supabaseService: SupabaseService,
   ) {}
 
-  async insertProduct() {
-    
+  async insertProduct(
+    productDto: CreateProductDto,
+    file: Express.Multer.File,
+  ): Promise<ProductResponse> {
+    // Validate brand existence
+    const brand = await this.brandRepository.findOne({
+      where: { id: productDto.brandId },
+    });
+    if (!brand) {
+      throw new NotFoundException('Brand does not exist');
+    }
+
+    // Validate category existence
+    const category = await this.categoryRepository.findOne({
+      where: { id: productDto.categoryId },
+    });
+    if (!category) {
+      throw new NotFoundException('Category does not exist');
+    }
+
+    // Check if the file exists
+    if (!file) {
+      throw new BadRequestException(
+        'No file uploaded. Please upload an image.',
+      );
+    }
+
+    // Create and save the product
+    const product = this.productRepository.create(productDto);
+    const saveProduct = await this.productRepository.save(product);
+
+    // Upload image to Supabase
+    const imageUrl = await this.supabaseService.uploadImage(file);
+    if (!imageUrl) {
+      throw new BadRequestException(
+        'Failed to upload image. Please try again.',
+      );
+    }
+
+    // Create and save the product image
+    const image = this.imageRepository.create({
+      imgUrl: imageUrl,
+      productId: saveProduct.id,
+    });
+    const savedImage = await this.imageRepository.save(image);
+
+    return { product: saveProduct, saveImage: savedImage };
   }
 }
