@@ -25,7 +25,7 @@ export class ProductController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @UseInterceptors(
     FileInterceptor('file', {
-      limits: { fileSize: 5 * 1024 * 1024 }, // Set a 5 MB size limit
+      limits: { fileSize: 50 * 1024 * 1024 }, // Set a 5 MB size limit
       fileFilter: (req, file, callback) => {
         if (file.mimetype.startsWith('image/')) {
           callback(null, true);
