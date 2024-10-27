@@ -7,6 +7,7 @@ import {
   UsePipes,
   ValidationPipe,
   Post,
+  Get,
 } from '@nestjs/common';
 
 import { AuthGuard } from '@nestjs/passport';
@@ -23,5 +24,13 @@ export class BrandController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async createBrand(@Body() brandDto: BrandDto) {
     return this.brandService.insertBrand(brandDto);
+  }
+
+  // Get all brands
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  @Get('all-brand')
+  async getAllBrand() {
+    return this.brandService.getAllBrand();
   }
 }
