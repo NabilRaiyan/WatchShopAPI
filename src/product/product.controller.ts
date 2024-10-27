@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -40,5 +41,13 @@ export class ProductController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     return this.productService.insertProduct(productDto, file);
+  }
+
+  // getting all products (watches)
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  @Get('all-watches')
+  async getAllWatches() {
+    return this.productService.getAllWatches();
   }
 }
