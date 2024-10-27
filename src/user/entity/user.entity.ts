@@ -1,7 +1,7 @@
 import { LikeEntity } from 'src/like/entity/like.entity';
 import { CartItemEntity } from '../../cart-item/entity/index';
 import { OrderEntity } from 'src/order/entity/order.entity';
-import { ReviewEntity } from 'src/review/entity/review.entity';
+import { ReviewEntity } from 'src/reviews/entity/review.entity';
 import { WishlistItemEntity } from 'src/wishlist-item/entity/wishlist-item.entity';
 import {
   Entity,

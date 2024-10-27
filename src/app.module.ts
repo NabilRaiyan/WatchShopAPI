@@ -7,7 +7,7 @@ import { CartItemModule } from './cart-item/cart-item.module';
 import { OrderItemModule } from './order-item/order-item.module';
 import { OrderModule } from './order/order.module';
 import { WishlistItemModule } from './wishlist-item/wishlist-item.module';
-import { ReviewModule } from './review/review.module';
+import { ReviewModule } from './reviews/review.module';
 import { LikeModule } from './like/like.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './supabase_auth/upload.module';
