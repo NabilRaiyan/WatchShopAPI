@@ -15,4 +15,9 @@ export class BrandService {
     // create new brand
     return await this.brandRepository.save(brandDto);
   }
+
+  // Get all brands
+  async getAllBrand(): Promise<BrandEntity[]> {
+    return this.brandRepository.find();
+  }
 }
