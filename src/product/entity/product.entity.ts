@@ -81,6 +81,6 @@ export class ProductEntity {
   @OneToMany(() => LikeEntity, (like) => like.product)
   likes: LikeEntity[];
 
-  @ManyToOne(() => BrandEntity, (brand) => brand.products, { eager: true })
+  @ManyToOne(() => BrandEntity, (brand) => brand.products)
   brand: BrandEntity;
 }

@@ -12,6 +12,7 @@ import { LikeModule } from './like/like.module';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './supabase_auth/upload.module';
 import { ConfigModule } from '@nestjs/config';
+import { BrandModule } from './brand/brand.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }), // Make ConfigModule global
     UploadModule,
+    BrandModule,
   ],
   controllers: [],
   providers: [],
