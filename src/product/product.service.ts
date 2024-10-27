@@ -82,4 +82,11 @@ export class ProductService {
 
     return { product: saveProduct, saveImage: savedImage };
   }
+
+  // Getting all watches from the db
+  async getAllWatches(): Promise<ProductEntity[]> {
+    return this.productRepository.find({
+      relations: ['brand', 'category', 'images'],
+    });
+  }
 }
