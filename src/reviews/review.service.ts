@@ -40,6 +40,11 @@ export class ReviewService {
     if (!isProductExist) {
       throw new NotFoundException('Product does not exist');
     }
-    return this.reviewRepository.create(reviewDto);
+    const review = this.reviewRepository.create({
+      ...reviewDto,
+      user: isUserExist,
+      product: isProductExist,
+    });
+    return await this.reviewRepository.save(review);
   }
 }

@@ -17,10 +17,6 @@ export class ReviewEntity {
   content: string;
   @Column({ type: 'float' })
   rating: number;
-  @Column()
-  userId: number;
-  @Column()
-  productId: number;
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
