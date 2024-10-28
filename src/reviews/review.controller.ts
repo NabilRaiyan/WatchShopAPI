@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Param,
@@ -18,6 +19,7 @@ import { ReviewDto } from './dto/review.dto';
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
 
+  // creating reviews
   @UseGuards(AuthGuard('jwt'))
   @Post('add-review/:product_id')
   @HttpCode(HttpStatus.CREATED)
@@ -30,5 +32,13 @@ export class ReviewController {
     console.log('Authenticated User:', req.user); // Log the authenticated user
     const user_id = req.user.userId;
     return this.reviewService.insertReview(reviewDto, user_id, product_id);
+  }
+
+  // getting all reviews
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  @Get('get-reviews/:product_id')
+  async getReviewsByProductId(@Param('product_id') product_id: number) {
+    return await this.reviewService.getReviewByProductId(product_id);
   }
 }

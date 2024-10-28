@@ -47,4 +47,24 @@ export class ReviewService {
     });
     return await this.reviewRepository.save(review);
   }
+
+  // get all reviews by product
+  async getReviewByProductId(product_id) {
+    const isProductExist = await this.productRepository.findOne({
+      where: {
+        id: product_id,
+      },
+    });
+
+    if (!isProductExist) {
+      throw new NotFoundException('Product does not exist');
+    }
+
+    return await this.productRepository.find({
+      where: {
+        id: product_id,
+      },
+      relations: ['reviews'],
+    });
+  }
 }
