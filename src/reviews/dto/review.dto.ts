@@ -1,4 +1,4 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty, Length, Max, Min } from 'class-validator';
 
 export class ReviewDto {
   @IsNotEmpty({ message: 'Please enter review' })
@@ -7,5 +7,7 @@ export class ReviewDto {
   })
   content: string;
   @IsNotEmpty({ message: 'Please enter rating of the product' })
+  @Min(1)
+  @Max(5)
   rating: number;
 }
