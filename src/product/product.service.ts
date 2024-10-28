@@ -89,7 +89,6 @@ export class ProductService {
       relations: ['brand', 'category', 'images', 'reviews'],
     });
   }
-  
 
   // get watch by brand name
   async getWatchByBrandName(brand_name): Promise<ProductEntity[]> {
