@@ -89,4 +89,25 @@ export class ProductService {
       relations: ['brand', 'category', 'images', 'reviews'],
     });
   }
+  
+
+  // get watch by brand name
+  async getWatchByBrandName(brand_name): Promise<ProductEntity[]> {
+    const isBrandExist = await this.brandRepository.findOne({
+      where: {
+        name: brand_name,
+      },
+    });
+
+    if (!isBrandExist) {
+      throw new NotFoundException('Brand does not exist');
+    }
+    const brand_id = isBrandExist.id;
+    return await this.productRepository.find({
+      where: {
+        brandId: brand_id,
+      },
+      relations: ['brand'],
+    });
+  }
 }

@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
@@ -15,6 +16,13 @@ import { ProductService } from './product.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+
+function capitalizeFirstLetter(word) {
+  if (typeof word !== 'string' || word.length === 0) {
+    return word; // Return the original word if it's not a string or is empty
+  }
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 @Controller('product')
 export class ProductController {
@@ -49,5 +57,15 @@ export class ProductController {
   @Get('all-watches')
   async getAllWatches() {
     return this.productService.getAllWatches();
+  }
+
+  // get watch by brand name
+  @UseGuards(AuthGuard('jwt'))
+  @Get('get-watch-by-brand/:brand_name')
+  @HttpCode(HttpStatus.CREATED)
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async getWatchByBrandName(@Param('brand_name') brandName: string) {
+    const brand_name = capitalizeFirstLetter(brandName);
+    return await this.productService.getWatchByBrandName(brand_name);
   }
 }
