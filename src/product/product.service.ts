@@ -86,7 +86,7 @@ export class ProductService {
   // Getting all watches from the db
   async getAllWatches(): Promise<ProductEntity[]> {
     return this.productRepository.find({
-      relations: ['brand', 'category', 'images'],
+      relations: ['brand', 'category', 'images', 'reviews'],
     });
   }
 }
