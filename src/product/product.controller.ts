@@ -17,11 +17,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-function capitalizeFirstLetter(word) {
-  if (typeof word !== 'string' || word.length === 0) {
-    return word; // Return the original word if it's not a string or is empty
+function capitalizeEachWord(phrase) {
+  if (typeof phrase !== 'string' || phrase.length === 0) {
+    return phrase; // Return the original phrase if it's not a string or is empty
   }
-  return word.charAt(0).toUpperCase() + word.slice(1);
+  return phrase
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 @Controller('product')
@@ -65,7 +68,8 @@ export class ProductController {
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async getWatchByBrandName(@Param('brand_name') brandName: string) {
-    const brand_name = capitalizeFirstLetter(brandName);
+    const brand_name = capitalizeEachWord(brandName);
+    console.log(brand_name);
     return await this.productService.getWatchByBrandName(brand_name);
   }
 }

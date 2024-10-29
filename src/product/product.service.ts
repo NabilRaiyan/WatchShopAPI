@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity, ProductImageEntity } from './entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
@@ -94,7 +94,7 @@ export class ProductService {
   async getWatchByBrandName(brand_name): Promise<ProductEntity[]> {
     const isBrandExist = await this.brandRepository.findOne({
       where: {
-        name: brand_name,
+        name: Like(`%${brand_name}%`),
       },
     });
 
