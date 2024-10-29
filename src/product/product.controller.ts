@@ -16,6 +16,7 @@ import { ProductService } from './product.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ProductEntity } from './entity';
 
 function capitalizeEachWord(phrase) {
   if (typeof phrase !== 'string' || phrase.length === 0) {
@@ -75,6 +76,11 @@ export class ProductController {
 
   // get product by name
   @UseGuards(AuthGuard('jwt'))
-  @Get('get-product-by-name')
+  @Get('get-product-by-name/:product_name')
   @HttpCode(HttpStatus.OK)
+  async getProductByName(
+    @Param('product_name') productName: string,
+  ): Promise<ProductEntity[]> {
+    return this.productService.getProductByName(productName);
+  }
 }
