@@ -16,7 +16,6 @@ export class CategoryService {
     return await this.categoryRepository.save(categoryDto);
   }
 
-
   // Get all categories
   async getAllCategories(): Promise<CategoryEntity[]> {
     return this.categoryRepository.find();

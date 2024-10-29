@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   UseGuards,
@@ -22,5 +23,13 @@ export class CategoryController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async createCategory(@Body() categoryDto: CategoryDto) {
     return this.categoryService.insertCategory(categoryDto);
+  }
+
+  // get all category
+  @UseGuards(AuthGuard('jwt'))
+  @Get('all-category')
+  @HttpCode(HttpStatus.OK)
+  async getAllCategories() {
+    return this.categoryService.getAllCategories();
   }
 }
