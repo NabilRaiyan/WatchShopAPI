@@ -91,7 +91,7 @@ export class ProductService {
   }
 
   // get watch by brand name
-  async getWatchByBrandName(brand_name): Promise<ProductEntity[]> {
+  async getWatchByBrandName(brand_name: string): Promise<ProductEntity[]> {
     const isBrandExist = await this.brandRepository.findOne({
       where: {
         name: Like(`%${brand_name}%`),
@@ -108,5 +108,21 @@ export class ProductService {
       },
       relations: ['brand'],
     });
+  }
+
+  // search product by name
+  async getProductByName(product_name: string): Promise<ProductEntity[]> {
+    const isProductExist = await this.productRepository.find({
+      where: {
+        name: Like(`%${product_name}%`),
+      },
+    });
+
+    if (!isProductExist) {
+      throw new NotFoundException(
+        'Product is not found. Search for other product',
+      );
+    }
+    return isProductExist;
   }
 }

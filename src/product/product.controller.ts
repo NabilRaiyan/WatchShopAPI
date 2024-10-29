@@ -72,4 +72,9 @@ export class ProductController {
     console.log(brand_name);
     return await this.productService.getWatchByBrandName(brand_name);
   }
+
+  // get product by name
+  @UseGuards(AuthGuard('jwt'))
+  @Get('get-product-by-name')
+  @HttpCode(HttpStatus.OK)
 }
