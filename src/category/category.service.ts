@@ -15,4 +15,10 @@ export class CategoryService {
     // create new category
     return await this.categoryRepository.save(categoryDto);
   }
+
+
+  // Get all categories
+  async getAllCategories(): Promise<CategoryEntity[]> {
+    return this.categoryRepository.find();
+  }
 }
