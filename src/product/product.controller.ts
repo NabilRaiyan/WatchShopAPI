@@ -16,7 +16,6 @@ import { ProductService } from './product.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ProductEntity } from './entity';
 
 function capitalizeEachWord(phrase) {
   if (typeof phrase !== 'string' || phrase.length === 0) {
@@ -66,7 +65,7 @@ export class ProductController {
   // get watch by brand name
   @UseGuards(AuthGuard('jwt'))
   @Get('get-watch-by-brand/:brand_name')
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async getWatchByBrandName(@Param('brand_name') brandName: string) {
     const brand_name = capitalizeEachWord(brandName);
@@ -78,9 +77,8 @@ export class ProductController {
   @UseGuards(AuthGuard('jwt'))
   @Get('get-product-by-name/:product_name')
   @HttpCode(HttpStatus.OK)
-  async getProductByName(
-    @Param('product_name') productName: string,
-  ): Promise<ProductEntity[]> {
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async getProductByName(@Param('product_name') productName: string) {
     const product_name = capitalizeEachWord(productName);
     return this.productService.getProductByName(product_name);
   }
