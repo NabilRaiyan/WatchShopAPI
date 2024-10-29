@@ -81,6 +81,7 @@ export class ProductController {
   async getProductByName(
     @Param('product_name') productName: string,
   ): Promise<ProductEntity[]> {
-    return this.productService.getProductByName(productName);
+    const product_name = capitalizeEachWord(productName);
+    return this.productService.getProductByName(product_name);
   }
 }
