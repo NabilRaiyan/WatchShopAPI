@@ -116,6 +116,7 @@ export class ProductService {
       where: {
         name: Like(`%${product_name}%`),
       },
+      relations: ['brand'];
     });
 
     if (!isProductExist) {
