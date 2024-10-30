@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity, ProductImageEntity } from './entity';
-import { AcceptedFields, Like, Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
@@ -14,6 +14,7 @@ import {
   AccessoryEntity,
   GiftBoxEntity,
 } from './entity/giftAndAccessories.entity';
+import { CreateAccessoryDto } from './dto/accessory.dto';
 
 export interface ProductResponse {
   product: ProductEntity;
@@ -142,8 +143,54 @@ export class ProductService {
     return isProductExist;
   }
 
-  // // Create and save the product (accessories)
-  // async insertAccessories(): Promise<AccessoryResponse> {
+  // Create and save the product (accessories)
+  async insertAccessories(
+    accessoriesDto: CreateAccessoryDto,
+    file: Express.Multer.File,
+  ): Promise<AccessoryResponse> {
+    const isBrandExist = await this.brandRepository.findOne({
+      where: {
+        id: accessoriesDto.brandId,
+      },
+    });
 
-  // }
+    if (!isBrandExist) {
+      throw new NotFoundException('Brand does not exist');
+    }
+
+    const isCategoryExist = await this.categoryRepository.findOne({
+      where: {
+        id: accessoriesDto.categoryId,
+      },
+    });
+
+    if (!isCategoryExist) {
+      throw new NotFoundException('Category does not exist');
+    }
+
+    if (!file) {
+      throw new BadRequestException('Image file is not uploaded');
+    }
+
+    // create accessory data
+    const createAccessory = this.accessoriesRepository.create(accessoriesDto);
+    const saveAccessory =
+      await this.accessoriesRepository.save(createAccessory);
+
+    // upload image to supabase
+    const imageUrl = await this.supabaseService.uploadImage(file);
+    if (!imageUrl) {
+      throw new BadRequestException(
+        'Failed to upload the image. Please try again',
+      );
+    }
+
+    const createImage = this.imageRepository.create({
+      imgUrl: imageUrl,
+      productId: saveAccessory.id,
+    });
+    const saveImageUrl = await this.accessoriesRepository.save(createImage);
+
+    return { accessories: saveAccessory, saveImage: saveImageUrl };
+  }
 }
