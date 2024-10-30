@@ -68,10 +68,6 @@ export class UpdateAccessoryDto {
   @IsOptional()
   price?: number;
 
-  @IsNumber()
-  @IsOptional()
-  quantity?: number;
-
   @IsString()
   @IsOptional()
   material?: string;
@@ -99,8 +95,4 @@ export class UpdateAccessoryDto {
   @IsNumber()
   @IsOptional()
   categoryId?: number;
-
-  @IsArray()
-  @IsOptional()
-  imageIds?: number[];
 }

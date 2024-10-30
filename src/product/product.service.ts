@@ -142,8 +142,8 @@ export class ProductService {
     return isProductExist;
   }
 
-  // Create and save the product (accessories)
-  async insertAccessories(): Promise<AccessoryResponse> {
-    
-  }
+  // // Create and save the product (accessories)
+  // async insertAccessories(): Promise<AccessoryResponse> {
+
+  // }
 }
