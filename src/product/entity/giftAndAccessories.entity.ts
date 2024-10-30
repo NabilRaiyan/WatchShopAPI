@@ -30,9 +30,6 @@ export class AccessoryEntity {
   price: number;
 
   @Column()
-  quantity: number;
-
-  @Column()
   material: string;
 
   @Column()
@@ -72,6 +69,7 @@ export class AccessoryEntity {
   reviews: ReviewEntity[];
 }
 
+// gift box entity
 @Entity('gift_boxes')
 export class GiftBoxEntity {
   @PrimaryGeneratedColumn()

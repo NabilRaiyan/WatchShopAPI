@@ -143,5 +143,7 @@ export class ProductService {
   }
 
   // Create and save the product (accessories)
-  async insertAccessories(): Promise<AccessoryEntity> {}
+  async insertAccessories(): Promise<AccessoryResponse> {
+    
+  }
 }
