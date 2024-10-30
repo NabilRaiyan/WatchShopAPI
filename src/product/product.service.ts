@@ -5,14 +5,23 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity, ProductImageEntity } from './entity';
-import { Like, Repository } from 'typeorm';
+import { AcceptedFields, Like, Repository } from 'typeorm';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
 import { CreateProductDto } from './dto';
+import {
+  AccessoryEntity,
+  GiftBoxEntity,
+} from './entity/giftAndAccessories.entity';
 
 export interface ProductResponse {
   product: ProductEntity;
+  saveImage: ProductImageEntity;
+}
+
+export interface AccessoryResponse {
+  accessories: AccessoryEntity;
   saveImage: ProductImageEntity;
 }
 
@@ -30,6 +39,12 @@ export class ProductService {
 
     @InjectRepository(BrandEntity)
     private readonly brandRepository: Repository<BrandEntity>,
+
+    @InjectRepository(AccessoryEntity)
+    private readonly accessoriesRepository: Repository<AccessoryEntity>,
+
+    @InjectRepository(GiftBoxEntity)
+    private readonly giftBoxRepository: Repository<GiftBoxEntity>,
 
     private readonly supabaseService: SupabaseService,
   ) {}
@@ -61,7 +76,7 @@ export class ProductService {
       );
     }
 
-    // Create and save the product
+    // Create and save the product (watch)
     const product = this.productRepository.create(productDto);
     const saveProduct = await this.productRepository.save(product);
 
@@ -126,4 +141,7 @@ export class ProductService {
     }
     return isProductExist;
   }
+
+  // Create and save the product (accessories)
+  async insertAccessories(): Promise<AccessoryEntity> {}
 }
