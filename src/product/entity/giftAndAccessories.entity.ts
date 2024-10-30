@@ -72,8 +72,6 @@ export class AccessoryEntity {
   reviews: ReviewEntity[];
 }
 
-
-
 @Entity('gift_boxes')
 export class GiftBoxEntity {
   @PrimaryGeneratedColumn()

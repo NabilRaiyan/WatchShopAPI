@@ -1,5 +1,9 @@
 import { ProductEntity } from 'src/product/entity';
 import {
+  AccessoryEntity,
+  GiftBoxEntity,
+} from 'src/product/entity/giftAndAccessories.entity';
+import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -26,4 +30,10 @@ export class CategoryEntity {
 
   @OneToMany(() => ProductEntity, (product) => product.category)
   products: ProductEntity[];
+
+  @OneToMany(() => AccessoryEntity, (accessory) => accessory.category)
+  accessories: AccessoryEntity[];
+
+  @OneToMany(() => GiftBoxEntity, (giftBox) => giftBox.category)
+  giftBoxes: GiftBoxEntity[];
 }

@@ -6,6 +6,10 @@ import { ProductEntity, ProductImageEntity } from './entity';
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
+import {
+  AccessoryEntity,
+  GiftBoxEntity,
+} from './entity/giftAndAccessories.entity';
 
 @Module({
   imports: [
@@ -14,6 +18,8 @@ import { SupabaseService } from 'src/supabase_auth/supabase.service';
       ProductImageEntity,
       CategoryEntity,
       BrandEntity,
+      GiftBoxEntity,
+      AccessoryEntity,
     ]),
   ],
   controllers: [ProductController],
