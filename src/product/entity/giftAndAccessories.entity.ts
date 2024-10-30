@@ -20,7 +20,7 @@ export class AccessoryEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false }) // Ensures the field cannot be null
   name: string;
 
   @Column()

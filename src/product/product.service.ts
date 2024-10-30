@@ -176,6 +176,8 @@ export class ProductService {
 
     // create accessory data
     const createAccessory = this.accessoriesRepository.create(accessoriesDto);
+    console.log('Accessory data to save:', createAccessory);
+
     const saveAccessory = await this.accessoriesRepository.save({
       ...createAccessory,
     });
