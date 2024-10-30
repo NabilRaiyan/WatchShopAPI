@@ -16,6 +16,7 @@ import { ProductService } from './product.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateAccessoryDto } from './dto/accessory.dto';
 
 function capitalizeEachWord(phrase) {
   if (typeof phrase !== 'string' || phrase.length === 0) {
@@ -81,5 +82,29 @@ export class ProductController {
   async getProductByName(@Param('product_name') productName: string) {
     const product_name = capitalizeEachWord(productName);
     return this.productService.getProductByName(product_name);
+  }
+
+  // insert accessory controller
+  @UseGuards(AuthGuard('jwt'))
+  @Post('add-accessory')
+  @HttpCode(HttpStatus.CREATED)
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+  @UseInterceptors(
+    FileInterceptor('file', {
+      limits: { fileSize: 50 * 1024 * 1024 }, // Set a 5 MB size limit
+      fileFilter: (req, file, callback) => {
+        if (file.mimetype.startsWith('image/')) {
+          callback(null, true);
+        } else {
+          callback(new Error('Only image files are allowed!'), false);
+        }
+      },
+    }),
+  )
+  async createAccessory(
+    @Body() accessoryDto: CreateAccessoryDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.productService.insertAccessories(accessoryDto, file);
   }
 }

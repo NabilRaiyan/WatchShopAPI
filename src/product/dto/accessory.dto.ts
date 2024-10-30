@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsNumber,
@@ -19,9 +20,6 @@ export class CreateAccessoryDto {
   @IsDecimal()
   price: number;
 
-  @IsNumber()
-  quantity: number;
-
   @IsString()
   @IsNotEmpty()
   material: string;
@@ -42,17 +40,13 @@ export class CreateAccessoryDto {
   @IsNotEmpty()
   stock_status: string;
 
-  @IsNumber()
+  @Type(() => Number) // Use @Type to ensure it's converted to number
   @IsNotEmpty()
   brandId: number;
 
-  @IsNumber()
+  @Type(() => Number) // Use @Type to ensure it's converted to number
   @IsNotEmpty()
   categoryId: number;
-
-  @IsArray()
-  @IsOptional()
-  imageIds: number[];
 }
 
 export class UpdateAccessoryDto {

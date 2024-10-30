@@ -148,6 +148,8 @@ export class ProductService {
     accessoriesDto: CreateAccessoryDto,
     file: Express.Multer.File,
   ): Promise<AccessoryResponse> {
+    console.log('Received accessory DTO:', accessoriesDto);
+    console.log('Uploaded file:', file);
     const isBrandExist = await this.brandRepository.findOne({
       where: {
         id: accessoriesDto.brandId,
@@ -174,8 +176,9 @@ export class ProductService {
 
     // create accessory data
     const createAccessory = this.accessoriesRepository.create(accessoriesDto);
-    const saveAccessory =
-      await this.accessoriesRepository.save(createAccessory);
+    const saveAccessory = await this.accessoriesRepository.save({
+      ...createAccessory,
+    });
 
     // upload image to supabase
     const imageUrl = await this.supabaseService.uploadImage(file);
