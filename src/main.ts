@@ -12,3 +12,6 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
+
+
+// Error while inserting accessories in the db and also accessories image url is not inserted to the db
