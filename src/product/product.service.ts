@@ -189,6 +189,7 @@ export class ProductService {
         'Failed to upload the image. Please try again',
       );
     }
+    
 
     const createImage = this.imageRepository.create({
       imgUrl: imageUrl,
