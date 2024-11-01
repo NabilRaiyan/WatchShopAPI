@@ -13,5 +13,4 @@ async function bootstrap() {
 }
 bootstrap();
 
-
 // Error while inserting accessories in the db and also accessories image url is not inserted to the db
