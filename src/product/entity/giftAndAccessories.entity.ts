@@ -15,6 +15,7 @@ import { WishlistItemEntity } from 'src/wishlist-item/entity/wishlist-item.entit
 import { ReviewEntity } from 'src/reviews/entity/review.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
 
+// accessories entity
 @Entity('accessories')
 export class AccessoryEntity {
   @PrimaryGeneratedColumn()
