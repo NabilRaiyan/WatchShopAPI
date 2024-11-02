@@ -50,6 +50,7 @@ export class CreateAccessoryDto {
   categoryId: number;
 }
 
+// accessories update dto
 export class UpdateAccessoryDto {
   @IsString()
   @IsOptional()
