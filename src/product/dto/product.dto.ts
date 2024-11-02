@@ -134,5 +134,5 @@ export class UpdateProductDto {
 
   @IsOptional()
   @IsNumber()
-  brandId?: number; // Assuming you want to include the brand ID
+  brandId?: number;
 }
