@@ -85,6 +85,7 @@ export class CreateProductDto {
   imageUrl: string;
 }
 
+// Update product dto
 export class UpdateProductDto {
   @IsOptional()
   @IsString()
