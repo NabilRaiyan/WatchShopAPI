@@ -8,6 +8,7 @@ import {
   IsNotEmpty,
 } from 'class-validator';
 
+// Accessories dto
 export class CreateAccessoryDto {
   @IsString()
   @IsNotEmpty()
