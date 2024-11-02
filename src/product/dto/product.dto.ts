@@ -43,6 +43,7 @@ export class FeaturesDto {
   buckle_type: string;
 }
 
+// Create product dto
 export class CreateProductDto {
   @IsString()
   name: string;
