@@ -7,6 +7,8 @@ import {
   ValidateNested,
   IsNotEmpty,
 } from 'class-validator';
+
+// Features dto
 export class FeaturesDto {
   @IsString()
   movement: string;
