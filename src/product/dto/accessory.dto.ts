@@ -41,7 +41,7 @@ export class CreateAccessoryDto {
   @IsNotEmpty()
   stock_status: string;
 
-  @Type(() => Number) // Use @Type to ensure it's converted to number
+  @Type(() => Number)
   @IsNotEmpty()
   brandId: number;
 
