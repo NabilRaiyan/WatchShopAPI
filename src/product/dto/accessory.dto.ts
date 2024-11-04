@@ -45,7 +45,7 @@ export class CreateAccessoryDto {
   @IsNotEmpty()
   brandId: number;
 
-  @Type(() => Number) // Use @Type to ensure it's converted to number
+  @Type(() => Number)
   @IsNotEmpty()
   categoryId: number;
 }
