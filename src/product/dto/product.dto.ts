@@ -58,7 +58,7 @@ export class CreateProductDto {
   quantity: number;
 
   @ValidateNested()
-  @Type(() => FeaturesDto)
+  @Type(() => FeaturesDto) // Use class-transformer to validate nested objects
   features: FeaturesDto;
 
   @IsString()
