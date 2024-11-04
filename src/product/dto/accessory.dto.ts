@@ -93,7 +93,7 @@ export class UpdateAccessoryDto {
   categoryId?: number;
 }
 
-// Gift box dto
+// Gift box create dto
 export class CreateGiftBoxDto {
   @IsString()
   @IsNotEmpty()
