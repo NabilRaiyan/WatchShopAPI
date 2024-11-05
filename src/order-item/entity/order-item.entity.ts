@@ -10,7 +10,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-// Creating orders items entity
+// Creating orders items entity or cart entity
 
 @Entity('orderItems')
 export class OrderItemEntity {
