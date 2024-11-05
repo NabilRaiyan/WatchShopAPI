@@ -1,6 +1,5 @@
 // Accessories image is not saved in the product image db
 
-
 import {
   Injectable,
   NotFoundException,
