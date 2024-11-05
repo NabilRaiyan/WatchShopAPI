@@ -1,6 +1,6 @@
 import { IsNotEmpty, Length, Max, Min } from 'class-validator';
 
-// 
+// Review dto
 export class ReviewDto {
   @IsNotEmpty({ message: 'Please enter review' })
   @Length(10, 100, {
