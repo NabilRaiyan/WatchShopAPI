@@ -162,6 +162,7 @@ export class ProductService {
       throw new NotFoundException('Brand does not exist');
     }
 
+    // checking if category exist
     const isCategoryExist = await this.categoryRepository.findOne({
       where: {
         id: accessoriesDto.categoryId,
