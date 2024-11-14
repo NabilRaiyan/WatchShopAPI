@@ -24,6 +24,7 @@ export interface ProductResponse {
   saveImage: ProductImageEntity;
 }
 
+// accessories response
 export interface AccessoryResponse {
   accessories: AccessoryEntity;
   saveImage: ProductImageEntity;
