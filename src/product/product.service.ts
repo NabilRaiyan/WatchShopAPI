@@ -192,6 +192,7 @@ export class ProductService {
       );
     }
 
+    // creating image and getting url from supabase
     const createImage = this.imageRepository.create({
       imgUrl: imageUrl,
       productId: saveAccessory.id,
