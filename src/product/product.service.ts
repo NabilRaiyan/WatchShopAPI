@@ -18,6 +18,7 @@ import {
 } from './entity/giftAndAccessories.entity';
 import { CreateAccessoryDto } from './dto/accessory.dto';
 
+// product response
 export interface ProductResponse {
   product: ProductEntity;
   saveImage: ProductImageEntity;
