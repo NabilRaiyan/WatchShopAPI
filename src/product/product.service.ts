@@ -56,6 +56,7 @@ export class ProductService {
     private readonly supabaseService: SupabaseService,
   ) {}
 
+  // insert product method
   async insertProduct(
     productDto: CreateProductDto,
     file: Express.Multer.File,
