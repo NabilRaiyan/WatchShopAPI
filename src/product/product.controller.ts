@@ -32,6 +32,7 @@ function capitalizeEachWord(phrase) {
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  // jwt auth guard
   @UseGuards(AuthGuard('jwt'))
   @Post('add-product')
   @HttpCode(HttpStatus.CREATED)
