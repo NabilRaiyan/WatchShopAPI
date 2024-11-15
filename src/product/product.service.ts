@@ -33,6 +33,7 @@ export interface AccessoryResponse {
 //  product service
 @Injectable()
 export class ProductService {
+  // constructor
   constructor(
     @InjectRepository(ProductImageEntity)
     private readonly imageRepository: Repository<ProductImageEntity>,
