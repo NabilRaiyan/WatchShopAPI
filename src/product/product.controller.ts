@@ -75,7 +75,7 @@ export class ProductController {
     return await this.productService.getWatchByBrandName(brand_name);
   }
 
-  // get product by name
+  // get product by 
   @UseGuards(AuthGuard('jwt'))
   @Get('get-product-by-name/:product_name')
   @HttpCode(HttpStatus.OK)
