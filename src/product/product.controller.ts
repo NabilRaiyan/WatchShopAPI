@@ -102,6 +102,7 @@ export class ProductController {
       },
     }),
   )
+  // creating accessories method
   async createAccessory(
     @Body() accessoryDto: CreateAccessoryDto,
     @UploadedFile() file: Express.Multer.File,
