@@ -85,7 +85,7 @@ export class ProductController {
     return this.productService.getProductByName(product_name);
   }
 
-  // insert accessory 
+  // insert accessory controller
   @UseGuards(AuthGuard('jwt'))
   @Post('add-accessory')
   @HttpCode(HttpStatus.CREATED)
