@@ -10,6 +10,7 @@ import {
   AccessoryEntity,
   GiftBoxEntity,
 } from './entity/giftAndAccessories.entity';
+import { AccessoriesImageEntity } from './entity/accessories.image.entity';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import {
       BrandEntity,
       GiftBoxEntity,
       AccessoryEntity,
+      AccessoriesImageEntity,
     ]),
   ],
   controllers: [ProductController],

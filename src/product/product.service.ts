@@ -17,6 +17,7 @@ import {
   GiftBoxEntity,
 } from './entity/giftAndAccessories.entity';
 import { CreateAccessoryDto } from './dto/accessory.dto';
+import { AccessoriesImageEntity } from './entity/accessories.image.entity';
 
 // product response
 export interface ProductResponse {
@@ -27,7 +28,7 @@ export interface ProductResponse {
 // accessories response
 export interface AccessoryResponse {
   accessories: AccessoryEntity;
-  saveImage: ProductImageEntity;
+  saveImage: AccessoriesImageEntity;
 }
 
 //  product service
@@ -37,6 +38,9 @@ export class ProductService {
   constructor(
     @InjectRepository(ProductImageEntity)
     private readonly imageRepository: Repository<ProductImageEntity>,
+
+    @InjectRepository(AccessoriesImageEntity)
+    private readonly accessoriesImageRepository: Repository<AccessoriesImageEntity>,
 
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,
@@ -157,6 +161,7 @@ export class ProductService {
   ): Promise<AccessoryResponse> {
     console.log('Received accessory DTO:', accessoriesDto);
     console.log('Uploaded file:', file);
+
     const isBrandExist = await this.brandRepository.findOne({
       where: {
         id: accessoriesDto.brandId,
@@ -199,11 +204,12 @@ export class ProductService {
     }
 
     // creating image and getting url from supabase
-    const createImage = this.imageRepository.create({
+    const createImage = this.accessoriesImageRepository.create({
       imgUrl: imageUrl,
-      productId: saveAccessory.id,
+      accessoryId: saveAccessory.id,
     });
-    const saveImageUrl = await this.accessoriesRepository.save(createImage);
+    const saveImageUrl =
+      await this.accessoriesImageRepository.save(createImage);
 
     return { accessories: saveAccessory, saveImage: saveImageUrl };
   }

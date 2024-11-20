@@ -14,6 +14,7 @@ import { CartItemEntity } from 'src/cart-item/entity/cartItem.entity';
 import { WishlistItemEntity } from 'src/wishlist-item/entity/wishlist-item.entity';
 import { ReviewEntity } from 'src/reviews/entity/review.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
+import { AccessoriesImageEntity } from './accessories.image.entity';
 
 // accessories entity
 @Entity('accessories')
@@ -57,8 +58,8 @@ export class AccessoryEntity {
   @ManyToOne(() => CategoryEntity, (category) => category.accessories)
   category: CategoryEntity;
 
-  @OneToMany(() => ProductImageEntity, (image) => image.product)
-  images: ProductImageEntity[];
+  @OneToMany(() => AccessoriesImageEntity, (image) => image.accessory)
+  images: AccessoriesImageEntity[];
 
   @OneToMany(() => CartItemEntity, (cartItem) => cartItem.product)
   cartItems: CartItemEntity[];
