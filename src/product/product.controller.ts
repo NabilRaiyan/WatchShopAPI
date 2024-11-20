@@ -18,6 +18,7 @@ import { CreateProductDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateAccessoryDto } from './dto/accessory.dto';
 
+// function for capitalizing each word's first letter
 function capitalizeEachWord(phrase) {
   if (typeof phrase !== 'string' || phrase.length === 0) {
     return phrase; // Return the original phrase if it's not a string or is empty
