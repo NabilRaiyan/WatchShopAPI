@@ -117,4 +117,15 @@ export class ProductController {
   async getAllAccessories() {
     return this.productService.getAllAccessories();
   }
+
+  // get accessories by name
+  @UseGuards(AuthGuard('jwt'))
+  @Get('get-accessories-by-name/:accessories_name')
+  @HttpCode(HttpStatus.OK)
+  async getAccessoriesByName(
+    @Param('accessories_name') accessoriesName: string,
+  ) {
+    const accessories_name = capitalizeEachWord(accessoriesName);
+    return this.productService.getAccessoriesByName(accessories_name);
+  }
 }
