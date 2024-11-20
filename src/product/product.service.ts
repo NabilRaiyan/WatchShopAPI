@@ -1,5 +1,3 @@
-// Accessories image is not saved in the product image db
-
 import {
   Injectable,
   NotFoundException,
@@ -219,5 +217,20 @@ export class ProductService {
     return this.accessoriesRepository.find({
       relations: ['images', 'reviews'],
     });
+  }
+
+  // getting accessories by name
+  async getAccessoriesByName(accessories_name: string) {
+    const isAccessoriesExist = await this.accessoriesRepository.find({
+      where: {
+        name: Like(`%${accessories_name}%`),
+      },
+    });
+
+    if (!isAccessoriesExist) {
+      throw new NotFoundException('Product is not available at this moment');
+    }
+
+    return isAccessoriesExist;
   }
 }
