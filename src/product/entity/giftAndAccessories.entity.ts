@@ -52,6 +52,12 @@ export class AccessoryEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @Column({ nullable: false })
+  categoryId: number;
+
+  @Column({ nullable: false })
+  brandId: number;
+
   @ManyToOne(() => BrandEntity, (brand) => brand.accessories)
   brand: BrandEntity;
 
