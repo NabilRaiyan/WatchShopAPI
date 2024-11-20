@@ -213,4 +213,11 @@ export class ProductService {
 
     return { accessories: saveAccessory, saveImage: saveImageUrl };
   }
+
+  // get all accessories
+  async getAllAccessories(): Promise<AccessoryEntity[]> {
+    return this.accessoriesRepository.find({
+      relations: ['images', 'reviews'],
+    });
+  }
 }

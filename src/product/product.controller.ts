@@ -109,4 +109,12 @@ export class ProductController {
   ) {
     return this.productService.insertAccessories(accessoryDto, file);
   }
+
+  // get all accessories
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  @Get('all-accessories')
+  async getAllAccessories() {
+    return this.productService.getAllAccessories();
+  }
 }
