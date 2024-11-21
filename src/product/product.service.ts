@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity, ProductImageEntity } from './entity';
-import { Like, Repository } from 'typeorm';
+import { Like, Raw, Repository } from 'typeorm';
 import { SupabaseService } from 'src/supabase_auth/supabase.service';
 import { CategoryEntity } from 'src/category/category.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
@@ -232,5 +232,27 @@ export class ProductService {
     }
 
     return isAccessoriesExist;
+  }
+
+  // filter products and accessories by color
+
+  async filterProductByColor(product_color: string) {
+    const isProductAvailable = await this.productRepository.find({
+      where: {
+        features: Raw(
+          (alias) => `${alias} ->> 'dial_color' ILIKE '%${product_color}%'`,
+        ),
+      },
+    });
+
+    const isAccessoriesAvailable = await this.accessoriesRepository.find({
+      where: {
+        color: product_color,
+      },
+    });
+
+    const combinedResult = [...isAccessoriesAvailable, ...isProductAvailable];
+
+    return combinedResult;
   }
 }

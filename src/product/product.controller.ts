@@ -129,4 +129,14 @@ export class ProductController {
     const accessories_name = capitalizeEachWord(accessoriesName);
     return this.productService.getAccessoriesByName(accessories_name);
   }
+
+
+  // filter product and accessories by color
+  @UseGuards(AuthGuard('jwt'))
+  @Get('filter-by-color/:color_name')
+  @HttpCode(HttpStatus.OK)
+  async filterByColor(@Param('color_name') color: string){
+    const searchedColor = capitalizeEachWord(color);
+    return this.productService.filterProductByColor(searchedColor);
+  }
 }
