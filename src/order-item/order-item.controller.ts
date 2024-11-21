@@ -15,11 +15,5 @@ import { OrderItemDto } from './orderItem.dto';
 export class OrderItemController {
   constructor(private readonly orderItemService: OrderItemService) {}
 
-  @UseGuards(AuthGuard('jwt'))
-  @HttpCode(HttpStatus.CREATED)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @Post('add-order-item')
-  async addProductToOrder(@Body() orderItemDto: OrderItemDto) {
-    return await this.orderItemService.addProductToOrder(orderItemDto);
-  }
+ 
 }

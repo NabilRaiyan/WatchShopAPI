@@ -18,12 +18,4 @@ import { OrderDto } from './order.dto';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  @UseGuards(AuthGuard('jwt'))
-  @HttpCode(HttpStatus.CREATED)
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @Post('add-order')
-  async insertOder(@Body() oderDto: OrderDto, @Req() req) {
-    const user_id = req.user.userId;
-    return await this.orderService.insertOrder(user_id, oderDto);
-  }
 }
