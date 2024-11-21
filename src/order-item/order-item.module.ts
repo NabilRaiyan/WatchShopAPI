@@ -12,5 +12,6 @@ import { ProductEntity } from 'src/product/entity';
   ],
   controllers: [OrderItemController],
   providers: [OrderItemService],
+  exports: [OrderItemService],
 })
 export class OrderItemModule {}
