@@ -19,10 +19,6 @@ export class OrderItemEntity {
   @Column({ type: 'decimal' })
   price: number;
   @Column()
-  orderId: number;
-  @Column()
-  productId: number;
-  @Column()
   quantity: number;
   @CreateDateColumn()
   createdAt: Date;
