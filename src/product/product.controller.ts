@@ -138,4 +138,13 @@ export class ProductController {
     const searchedColor = capitalizeEachWord(color);
     return this.productService.filterProductByColor(searchedColor);
   }
+
+  // filter product by gender
+  @UseGuards(AuthGuard('jwt'))
+  @Get('filter-by-gender/:gender')
+  @HttpCode(HttpStatus.OK)
+  async filterByGender(@Param('gender') gender: string) {
+    const searchedGender = capitalizeEachWord(gender);
+    return this.productService.filterProductByGender(searchedGender);
+  }
 }

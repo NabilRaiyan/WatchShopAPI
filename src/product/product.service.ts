@@ -235,7 +235,6 @@ export class ProductService {
   }
 
   // filter products and accessories by color
-
   async filterProductByColor(product_color: string) {
     try {
       const isAccessoriesAvailable = await this.accessoriesRepository.find({
@@ -249,5 +248,18 @@ export class ProductService {
     } catch (e) {
       throw new Error('Failed to filter accessories by color.');
     }
+  }
+
+  // filter product by gender
+  async filterProductByGender(gender: string) {
+    const isProductAvailable = await this.productRepository.find({
+      where: {
+        gender: Like(`%${gender}%`),
+      },
+    });
+    if (!isProductAvailable) {
+      throw new NotFoundException('Product is not available');
+    }
+    return isProductAvailable;
   }
 }
