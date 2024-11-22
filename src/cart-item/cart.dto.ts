@@ -6,9 +6,6 @@ export class CartItemDto {
   @Min(1, { message: 'Quantity must be at least 1.' })
   quantity: number;
 
-  @IsNotEmpty({ message: 'User ID is required.' })
-  userId: number;
-
   @IsNotEmpty({ message: 'Product ID is required.' })
   productId: number;
 }

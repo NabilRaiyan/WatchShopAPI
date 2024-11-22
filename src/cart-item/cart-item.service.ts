@@ -20,51 +20,54 @@ export class CartItemService {
   //   inserting item to the cart
   async insertCartItem(
     userId: number,
-    productId: number,
     cartItemDto: CartItemDto,
   ): Promise<CartItemEntity> {
-    try {
-      const isUserExist = await this.userRepository.findOne({
-        where: {
-          id: userId,
-        },
+    const productId = cartItemDto.productId;
+    const isUserExist = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException(
+        'Please sign up or sing in if you have any account',
+      );
+    }
+
+    const isProductExist = await this.productRepository.findOne({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!isProductExist) {
+      throw new NotFoundException('Product is not available');
+    }
+
+    const existingCartItem = await this.cartItemRepository.findOne({
+      where: { productId, userId },
+      relations: ['product'],
+    });
+
+    if (existingCartItem) {
+      // Update quantity if product exists in cart
+      existingCartItem.quantity += 1;
+      return await this.cartItemRepository.save(existingCartItem);
+    } else {
+      // Add new product to cart
+      const newCartItem = this.cartItemRepository.create({
+        ...cartItemDto,
+        productId,
+        userId,
       });
+      await this.cartItemRepository.save(newCartItem);
 
-      if (!isUserExist) {
-        throw new NotFoundException(
-          'Please sign up or sing in if you have any account',
-        );
-      }
-
-      const isProductExist = await this.productRepository.findOne({
-        where: {
-          id: productId,
-        },
+      // Fetch and return the new cart item with product details
+      return await this.cartItemRepository.findOne({
+        where: { id: newCartItem.id },
+        relations: ['product'], // Include the product relationship
       });
-
-      if (!isProductExist) {
-        throw new NotFoundException('Product is not available');
-      }
-
-      const existingCartItem = await this.cartItemRepository.findOne({
-        where: { productId, userId },
-      });
-
-      if (existingCartItem) {
-        // Update quantity if product exists in cart
-        existingCartItem.quantity += 1;
-        return await this.cartItemRepository.save(existingCartItem);
-      } else {
-        // Add new product to cart
-        const newCartItem = this.cartItemRepository.create({
-          ...cartItemDto,
-          productId,
-          userId,
-        });
-        return await this.cartItemRepository.save(newCartItem);
-      }
-    } catch (error) {
-      throw new Error(`Some error has happened ${error}`);
     }
   }
 }
