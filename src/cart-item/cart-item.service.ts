@@ -75,6 +75,8 @@ export class CartItemService {
   async deleteCartItem(userId: number, productId: number) {
     const product_id = productId;
     console.log(product_id)
+    console.log(userId)
+
 
     const isUserExist = await this.userRepository.findOne({
       where: {
@@ -89,9 +91,11 @@ export class CartItemService {
     }
     const isItemExistInCart = await this.cartItemRepository.findOne({
       where: {
-        id: product_id,
+        productId: product_id,
       },
     });
+    console.log(isItemExistInCart)
+
 
     if (!isItemExistInCart) {
       throw new NotFoundException('Item does not exist in the cart');
