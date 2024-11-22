@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Request,
   UseGuards,
   UsePipes,
@@ -39,4 +40,18 @@ export class CartItemController {
   }
 
   // reduce cart item quantity form cart
+  // delete cart item form the cart
+  @UseGuards(AuthGuard('jwt'))
+  @Put('reduce-quantity/:product_id')
+  @HttpCode(HttpStatus.OK)
+  async reduceProductQuantityFromCart(
+    @Param('product_id') productId: number,
+    @Request() req,
+  ) {
+    const user_id = req.user.userId;
+    return await this.cartItemService.reduceQuantityFromCart(
+      productId,
+      user_id,
+    );
+  }
 }

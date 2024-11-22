@@ -119,13 +119,19 @@ export class CartItemService {
       where: {
         productId: product_id,
       },
+      relations: ['product'],
     });
 
     if (!isItemExistInCart) {
       throw new NotFoundException('Item does not exist in the cart');
     }
-
-    isItemExistInCart.quantity -= 1;
-    return await this.cartItemRepository.save(isItemExistInCart);
+    if (isItemExistInCart.quantity > 1) {
+      isItemExistInCart.quantity -= 1;
+      await this.cartItemRepository.save(isItemExistInCart);
+      return { message: 'Product quantity reduced successfully' };
+    } else {
+      await this.cartItemRepository.remove(isItemExistInCart);
+      return { message: 'Product removed from the cart as quantity reached 0' };
+    }
   }
 }
