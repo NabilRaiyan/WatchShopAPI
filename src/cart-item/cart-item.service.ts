@@ -92,12 +92,40 @@ export class CartItemService {
       },
     });
 
-
     if (!isItemExistInCart) {
       throw new NotFoundException('Item does not exist in the cart');
     }
 
     await this.cartItemRepository.delete(isItemExistInCart.id);
 
-    return { message: 'Item successfully removed from the cart' }  }
+    return { message: 'Item successfully removed from the cart' };
+  }
+
+  //   reduce product quantity from cart
+  async reduceQuantityFromCart(productId: number, userId: number) {
+    const product_id = productId;
+    const isUserExist = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException(
+        'Please sign up or if you already signed up, please sign in',
+      );
+    }
+    const isItemExistInCart = await this.cartItemRepository.findOne({
+      where: {
+        productId: product_id,
+      },
+    });
+
+    if (!isItemExistInCart) {
+      throw new NotFoundException('Item does not exist in the cart');
+    }
+
+    isItemExistInCart.quantity -= 1;
+    return await this.cartItemRepository.save(isItemExistInCart);
+  }
 }

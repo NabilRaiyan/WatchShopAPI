@@ -35,7 +35,8 @@ export class CartItemController {
   @HttpCode(HttpStatus.OK)
   async deleteCartItem(@Param('product_id') productId: number, @Request() req) {
     const user_id = req.user.userId;
-    console.log(productId)
     return await this.cartItemService.deleteCartItem(user_id, productId);
   }
+
+  // reduce cart item quantity form cart
 }
