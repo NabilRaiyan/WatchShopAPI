@@ -1,4 +1,5 @@
 import { ProductEntity } from 'src/product/entity';
+import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
 import { UserEntity } from 'src/user/entity';
 import {
   Entity,
@@ -30,4 +31,7 @@ export class CartItemEntity {
 
   @ManyToOne(() => ProductEntity, (product) => product.cartItems)
   product: ProductEntity;
+
+  @ManyToOne(() => AccessoryEntity, (accessories) => accessories.cartItems)
+  accessories: AccessoryEntity;
 }

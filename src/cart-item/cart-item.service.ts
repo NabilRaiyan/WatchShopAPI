@@ -5,6 +5,7 @@ import { UserEntity } from 'src/user/entity';
 import { Repository } from 'typeorm';
 import { CartItemEntity } from './entity';
 import { CartItemDto } from './cart.dto';
+import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
 
 @Injectable()
 export class CartItemService {
@@ -15,6 +16,8 @@ export class CartItemService {
     private readonly productRepository: Repository<ProductEntity>,
     @InjectRepository(CartItemEntity)
     private readonly cartItemRepository: Repository<CartItemEntity>,
+    @InjectRepository(AccessoryEntity)
+    private readonly accessoriesRepository: Repository<AccessoryEntity>,
   ) {}
 
   //   inserting item to the cart
