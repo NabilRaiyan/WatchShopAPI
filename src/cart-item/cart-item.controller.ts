@@ -22,7 +22,6 @@ export class CartItemController {
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async insertIntoCart(@Body() cartItemDto: CartItemDto, @Request() req) {
-    console.log('Authenticated User:', req.user); // Log the authenticated user
     const user_id = req.user.userId;
     return await this.cartItemService.insertCartItem(user_id, cartItemDto);
   }
