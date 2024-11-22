@@ -70,4 +70,34 @@ export class CartItemService {
       });
     }
   }
+
+  //   delete cart item
+  async deleteCartItem(userId: number, productId: number) {
+    const product_id = productId;
+    console.log(product_id)
+
+    const isUserExist = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException(
+        'Please sign up or if you already signed up, please sign in',
+      );
+    }
+    const isItemExistInCart = await this.cartItemRepository.findOne({
+      where: {
+        id: product_id,
+      },
+    });
+
+    if (!isItemExistInCart) {
+      throw new NotFoundException('Item does not exist in the cart');
+    }
+
+    await this.cartItemRepository.delete(isItemExistInCart.id);
+
+    return { message: 'Item successfully removed from the cart' }  }
 }

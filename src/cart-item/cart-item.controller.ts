@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -17,6 +19,7 @@ import { CartItemDto } from './cart.dto';
 export class CartItemController {
   constructor(private readonly cartItemService: CartItemService) {}
 
+  // insert cart item
   @UseGuards(AuthGuard('jwt'))
   @Post('insert-into-cart')
   @HttpCode(HttpStatus.CREATED)
@@ -24,5 +27,15 @@ export class CartItemController {
   async insertIntoCart(@Body() cartItemDto: CartItemDto, @Request() req) {
     const user_id = req.user.userId;
     return await this.cartItemService.insertCartItem(user_id, cartItemDto);
+  }
+
+  // delete cart item form the cart
+  @UseGuards(AuthGuard('jwt'))
+  @Delete('delete-from-cart/:product_id')
+  @HttpCode(HttpStatus.OK)
+  async deleteCartItem(@Param('product_id') productId: number, @Request() req) {
+    const user_id = req.user.userId;
+    console.log(productId)
+    return await this.cartItemService.deleteCartItem(user_id, productId);
   }
 }
