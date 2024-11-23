@@ -16,6 +16,7 @@ import { CartItemService } from './cart-item.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CartItemDto } from './cart.dto';
 
+// cart item controller
 @Controller('cart-item')
 export class CartItemController {
   constructor(private readonly cartItemService: CartItemService) {}
