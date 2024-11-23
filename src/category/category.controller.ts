@@ -13,6 +13,7 @@ import { Post } from '@nestjs/common';
 import { CategoryDto } from './category.dto';
 import { AuthGuard } from '@nestjs/passport';
 
+// category controller
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
