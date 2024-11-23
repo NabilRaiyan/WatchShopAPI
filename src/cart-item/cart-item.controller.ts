@@ -40,7 +40,7 @@ export class CartItemController {
   }
 
   // reduce cart item quantity form cart
-  // delete cart item form the cart
+  // delete cart item form the cart after quantity <= 0
   @UseGuards(AuthGuard('jwt'))
   @Put('reduce-quantity/:product_id')
   @HttpCode(HttpStatus.OK)
