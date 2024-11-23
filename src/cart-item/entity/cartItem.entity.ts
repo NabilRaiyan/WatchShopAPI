@@ -26,6 +26,7 @@ export class CartItemEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  // creating relationship
   @ManyToOne(() => UserEntity, (user) => user.cartItems)
   user: UserEntity;
 
