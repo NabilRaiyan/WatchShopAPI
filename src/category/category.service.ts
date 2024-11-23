@@ -11,6 +11,7 @@ export class CategoryService {
     private categoryRepository: Repository<CategoryEntity>,
   ) {}
 
+  // inserting category
   async insertCategory(categoryDto: CategoryDto): Promise<CategoryEntity> {
     // create new category
     return await this.categoryRepository.save(categoryDto);
