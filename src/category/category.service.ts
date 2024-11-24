@@ -4,7 +4,7 @@ import { CategoryEntity } from './category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-// category service
+// category 
 @Injectable()
 export class CategoryService {
   constructor(
