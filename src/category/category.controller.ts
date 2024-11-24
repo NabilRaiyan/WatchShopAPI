@@ -18,6 +18,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  // applying auth guard
   @UseGuards(AuthGuard('jwt'))
   @Post('add-categories')
   @HttpCode(HttpStatus.CREATED)
