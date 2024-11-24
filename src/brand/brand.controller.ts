@@ -14,6 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { BrandDto } from './brand.dto';
 import { BrandService } from './brand.service';
 
+// brand controller
 @Controller('brand')
 export class BrandController {
   constructor(private readonly brandService: BrandService) {}
