@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ProductEntity } from 'src/product/entity';
 import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
 
+// brand entity
 @Entity('brand')
 export class BrandEntity {
   @PrimaryGeneratedColumn()
