@@ -11,8 +11,8 @@ export class BrandService {
     private brandRepository: Repository<BrandEntity>,
   ) {}
 
+  // create new brand
   async insertBrand(brandDto: BrandDto): Promise<BrandEntity> {
-    // create new brand
     return await this.brandRepository.save(brandDto);
   }
 
