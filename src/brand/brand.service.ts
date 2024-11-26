@@ -4,6 +4,7 @@ import { BrandEntity } from './brand.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+// brand service
 @Injectable()
 export class BrandService {
   constructor(
