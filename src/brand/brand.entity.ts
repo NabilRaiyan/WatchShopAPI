@@ -20,6 +20,7 @@ export class BrandEntity {
   @Column({ nullable: true })
   foundedYear: number;
 
+  // creating relationships
   @OneToMany(() => ProductEntity, (product) => product.brand)
   products: ProductEntity[];
   @OneToMany(() => AccessoryEntity, (accessory) => accessory.brand)
