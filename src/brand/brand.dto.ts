@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, Matches, Min } from 'class-validator';
 
-// brand dto
+// brand dto class
 export class BrandDto {
   @IsNotEmpty({ message: 'Please Enter Category Name' })
   @Matches(/^[a-zA-Z\s]+$/, {
