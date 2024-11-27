@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from 'src/product/entity';
 import { UserEntity } from 'src/user/entity';
@@ -26,5 +26,11 @@ export class LikeService {
         id: userId,
       },
     });
+
+    if (!isUserExist) {
+      throw new NotFoundException(
+        'Please sign up or sing in if you have any account',
+      );
+    }
   }
 }
