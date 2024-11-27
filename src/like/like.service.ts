@@ -13,7 +13,8 @@ export class LikeService {
     private readonly productRepository: Repository<ProductEntity>,
   ) {}
 
-  async insertLike(){
-    
+  // insert like
+  async insertLike(userId: number, productId: number, likeCount:number){
+
   }
 }
