@@ -4,6 +4,7 @@ import { LikeController } from './like.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LikeEntity } from './entity/like.entity';
 
+// like module
 @Module({
   imports: [TypeOrmModule.forFeature([LikeEntity])],
   controllers: [LikeController],
