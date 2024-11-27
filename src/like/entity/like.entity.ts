@@ -26,6 +26,7 @@ export class LikeEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  // creating relationship
   @ManyToOne(() => UserEntity, (user) => user.likes)
   user: UserEntity;
 
