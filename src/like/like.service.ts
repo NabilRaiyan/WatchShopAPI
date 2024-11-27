@@ -12,4 +12,8 @@ export class LikeService {
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,
   ) {}
+
+  async insertLike(){
+    
+  }
 }
