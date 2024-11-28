@@ -5,6 +5,7 @@ import { UserEntity } from 'src/user/entity';
 import { Repository } from 'typeorm';
 import { LikeEntity } from './entity/like.entity';
 
+// Like service
 @Injectable()
 export class LikeService {
   constructor(
