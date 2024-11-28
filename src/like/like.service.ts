@@ -28,6 +28,7 @@ export class LikeService {
       },
     });
 
+    // checking if user exist
     if (!isUserExist) {
       throw new NotFoundException(
         'Please sign up or sing in if you have any account',
