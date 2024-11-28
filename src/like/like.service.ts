@@ -22,6 +22,8 @@ export class LikeService {
     productId: number,
     likeCount: number,
   ): Promise<LikeEntity> {
+
+    // fetching user data if user exist
     const isUserExist = await this.userRepository.findOne({
       where: {
         id: userId,
