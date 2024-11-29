@@ -6,6 +6,8 @@ import { CartItemEntity } from './entity/cartItem.entity';
 import { UserEntity } from 'src/user/entity';
 import { ProductEntity } from 'src/product/entity';
 import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
+import { OrderEntity } from 'src/order/entity/order.entity';
+import { OrderItemEntity } from 'src/order-item/entity/order-item.entity';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
       UserEntity,
       ProductEntity,
       AccessoryEntity,
+      OrderEntity,
+      OrderItemEntity,
     ]),
   ],
   controllers: [CartItemController],

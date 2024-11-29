@@ -55,4 +55,13 @@ export class CartItemController {
       user_id,
     );
   }
+
+  // checkout controller
+  @UseGuards(AuthGuard('jwt'))
+  @Post('checkout')
+  @HttpCode(HttpStatus.OK)
+  async checkoutProducts(@Request() req) {
+    const user_id = req.user.userId;
+    return await this.cartItemService.checkout(user_id);
+  }
 }

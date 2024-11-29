@@ -6,6 +6,8 @@ import { Repository } from 'typeorm';
 import { CartItemEntity } from './entity';
 import { CartItemDto } from './cart.dto';
 import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
+import { OrderItemEntity } from 'src/order-item/entity/order-item.entity';
+import { OrderEntity, OrderStatus } from 'src/order/entity/order.entity';
 
 @Injectable()
 export class CartItemService {
@@ -18,6 +20,10 @@ export class CartItemService {
     private readonly cartItemRepository: Repository<CartItemEntity>,
     @InjectRepository(AccessoryEntity)
     private readonly accessoriesRepository: Repository<AccessoryEntity>,
+    @InjectRepository(OrderItemEntity)
+    private readonly orderItemRepository: Repository<OrderItemEntity>,
+    @InjectRepository(OrderEntity)
+    private readonly orderRepository: Repository<OrderEntity>,
   ) {}
 
   //   inserting item to the cart
@@ -136,5 +142,66 @@ export class CartItemService {
       await this.cartItemRepository.remove(isItemExistInCart);
       return { message: 'Product removed from the cart as quantity reached 0' };
     }
+  }
+
+  // checkout function
+  async checkout(userId: number): Promise<OrderEntity> {
+    // Verify if the user exists
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['cartItems'], // Include cart items in the query
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found. Please sign up or sign in.');
+    }
+
+    // Check if the cart is empty
+    const cartItems = await this.cartItemRepository.find({
+      where: { userId },
+      relations: ['product'], // Include product details in the query
+    });
+
+    if (cartItems.length === 0) {
+      throw new NotFoundException(
+        'Your cart is empty. Add products to checkout.',
+      );
+    }
+
+    // Calculate the total price of the order
+    const totalPrice = cartItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0,
+    );
+
+    // Create a new order
+    const order = this.orderRepository.create({
+      userId,
+      totalPrice,
+      status: OrderStatus.PENDING,
+    });
+    const savedOrder = await this.orderRepository.save(order);
+
+    // Map cart items to order items
+    const orderItems = cartItems.map((cartItem) => {
+      return this.orderItemRepository.create({
+        order: savedOrder,
+        product: cartItem.product,
+        price: cartItem.product.price,
+        quantity: cartItem.quantity,
+      });
+    });
+
+    // Save all order items in the database
+    await this.orderItemRepository.save(orderItems);
+
+    // Clear the cart items for the user
+    await this.cartItemRepository.delete({ userId });
+
+    // Return the created order with details
+    return await this.orderRepository.findOne({
+      where: { id: savedOrder.id },
+      relations: ['orderItems', 'orderItems.product'], // Include related entities
+    });
   }
 }
