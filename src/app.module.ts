@@ -39,6 +39,7 @@ import { BrandModule } from './brand/brand.module';
     ConfigModule.forRoot({ isGlobal: true }), // Make ConfigModule global
     UploadModule,
     BrandModule,
+    LikeModule,
   ],
   controllers: [],
   providers: [],
