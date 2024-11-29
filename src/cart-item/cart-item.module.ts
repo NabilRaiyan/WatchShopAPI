@@ -9,6 +9,7 @@ import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
 import { OrderEntity } from 'src/order/entity/order.entity';
 import { OrderItemEntity } from 'src/order-item/entity/order-item.entity';
 
+// cart item module
 @Module({
   imports: [
     TypeOrmModule.forFeature([
