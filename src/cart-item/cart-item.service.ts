@@ -9,6 +9,7 @@ import { AccessoryEntity } from 'src/product/entity/giftAndAccessories.entity';
 import { OrderItemEntity } from 'src/order-item/entity/order-item.entity';
 import { OrderEntity, OrderStatus } from 'src/order/entity/order.entity';
 
+// cart item service
 @Injectable()
 export class CartItemService {
   constructor(
