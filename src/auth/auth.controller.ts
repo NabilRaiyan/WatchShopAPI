@@ -23,6 +23,7 @@ export class AuthController {
     return this.authService.signUp(authDto);
   }
 
+  // sign in controller
   @Post('signin')
   @HttpCode(HttpStatus.OK)
   @UsePipes(new ValidationPipe({ whitelist: true }))
