@@ -16,6 +16,7 @@ import { SignInDto } from './dto/signinDto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  // sign up controller
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe({ whitelist: true }))
