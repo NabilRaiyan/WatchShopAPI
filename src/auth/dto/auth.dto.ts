@@ -7,6 +7,7 @@ import {
   IsNotEmpty,
 } from 'class-validator';
 
+// auth dto
 export class AuthDto {
   @IsNotEmpty({ message: 'Please enter name' })
   @IsString({ message: 'Name should be a string' })
