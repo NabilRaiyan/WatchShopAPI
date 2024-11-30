@@ -1,5 +1,6 @@
 import { IsEmail, Matches, IsNotEmpty } from 'class-validator';
 
+// sign in dto
 export class SignInDto {
   @IsNotEmpty({ message: 'Please Enter Email' })
   @IsEmail({}, { message: 'Email must be a valid email address' })
