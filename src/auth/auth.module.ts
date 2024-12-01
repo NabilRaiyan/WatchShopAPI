@@ -9,7 +9,6 @@ import { JwtStrategy } from './strategy';
 
 // auth module
 @Module({
-  // importing entity
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
     JwtModule.register({
