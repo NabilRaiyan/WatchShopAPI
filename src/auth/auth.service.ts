@@ -83,6 +83,7 @@ export class AuthService {
       throw new NotFoundException('Invalid email or password');
     }
 
+    // creating access token
     const payload = { userId: user.id, email: user.email };
     const accessToken = await this.jwtService.signAsync(payload);
 
