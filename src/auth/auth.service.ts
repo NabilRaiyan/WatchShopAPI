@@ -74,6 +74,7 @@ export class AuthService {
       throw new NotFoundException('Invalid email or password');
     }
 
+    // hashing password
     const isPasswordValid = await bcrypt.compare(
       signInDto.password,
       user.password,
