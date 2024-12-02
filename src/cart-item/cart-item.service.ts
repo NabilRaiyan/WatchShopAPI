@@ -92,6 +92,7 @@ export class CartItemService {
       },
     });
 
+    // user exist
     if (!isUserExist) {
       throw new NotFoundException(
         'Please sign up or if you already signed up, please sign in',
