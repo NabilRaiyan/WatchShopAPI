@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, Matches, Min } from 'class-validator';
 
-// category dto
+// category 
 export class CategoryDto {
   @IsNotEmpty({ message: 'Please Enter Category Name' })
   @Matches(/^[a-zA-Z\s]+$/, {
