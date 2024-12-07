@@ -6,6 +6,7 @@ import { UserEntity } from 'src/user/entity';
 import { OrderDto } from './order.dto';
 import { OrderItemService } from 'src/order-item/order-item.service';
 
+// order service
 @Injectable()
 export class OrderService {
   constructor(
