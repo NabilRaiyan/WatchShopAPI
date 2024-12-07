@@ -14,6 +14,4 @@ import { OrderItemDto } from './orderItem.dto';
 @Controller('order-item')
 export class OrderItemController {
   constructor(private readonly orderItemService: OrderItemService) {}
-
- 
 }
