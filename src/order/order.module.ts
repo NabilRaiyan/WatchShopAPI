@@ -6,6 +6,7 @@ import { OrderEntity } from './entity/order.entity';
 import { UserEntity } from 'src/user/entity';
 import { OrderItemModule } from 'src/order-item/order-item.module';
 
+// order module
 @Module({
   imports: [
     TypeOrmModule.forFeature([OrderEntity, UserEntity]),
