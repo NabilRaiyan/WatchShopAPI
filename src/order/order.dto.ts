@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsEnum } from 'class-validator';
 import { OrderStatus } from 'src/order/entity/order.entity';
 
+
+// order dto
 export class OrderDto {
   @IsNotEmpty({ message: 'Total price should not be empty' })
   totalPrice: number;
