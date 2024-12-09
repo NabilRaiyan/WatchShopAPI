@@ -6,7 +6,6 @@ import { OrderItemEntity } from './entity/order-item.entity';
 import { OrderEntity } from 'src/order/entity/order.entity';
 import { ProductEntity } from 'src/product/entity';
 
-
 // order item module
 @Module({
   imports: [
