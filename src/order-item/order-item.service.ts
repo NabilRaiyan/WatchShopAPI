@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { OrderEntity } from 'src/order/entity/order.entity';
 import { ProductEntity } from 'src/product/entity';
 import { OrderItemDto } from './orderItem.dto';
+
+// order item service
 @Injectable()
 export class OrderItemService {
   constructor(
