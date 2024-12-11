@@ -9,6 +9,7 @@ import {
 
 import { ProductEntity } from './product.entity';
 
+// image url entity
 @Entity('productImageUrl')
 export class ProductImageEntity {
   @PrimaryGeneratedColumn()
