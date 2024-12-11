@@ -17,6 +17,7 @@ import { ReviewEntity } from 'src/reviews/entity/review.entity';
 import { LikeEntity } from 'src/like/entity/like.entity';
 import { BrandEntity } from 'src/brand/brand.entity';
 
+// product entity
 @Entity('products')
 export class ProductEntity {
   @PrimaryGeneratedColumn()
