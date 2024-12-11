@@ -6,7 +6,7 @@ import { OrderEntity } from 'src/order/entity/order.entity';
 import { ProductEntity } from 'src/product/entity';
 import { OrderItemDto } from './orderItem.dto';
 
-// order item 
+// order item service
 @Injectable()
 export class OrderItemService {
   constructor(
