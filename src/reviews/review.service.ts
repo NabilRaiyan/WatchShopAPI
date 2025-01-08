@@ -30,6 +30,7 @@ export class ReviewService {
       },
     });
 
+    // checking if the product exist
     const isProductExist = await this.productRepository.findOne({
       where: {
         id: product_id,
