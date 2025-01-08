@@ -17,6 +17,7 @@ export class ReviewService {
     private productRepository: Repository<ProductEntity>,
   ) {}
 
+  // insert review
   async insertReview(
     reviewDto: ReviewDto,
     user_id,
