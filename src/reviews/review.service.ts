@@ -43,6 +43,7 @@ export class ReviewService {
     if (!isProductExist) {
       throw new NotFoundException('Product does not exist');
     }
+    // creating review
     const review = this.reviewRepository.create({
       ...reviewDto,
       user: isUserExist,
