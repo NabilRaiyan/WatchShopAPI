@@ -50,6 +50,8 @@ export class ProductController {
       },
     }),
   )
+
+  // create product
   async createProduct(
     @Body() productDto: CreateProductDto,
     @UploadedFile() file: Express.Multer.File,
