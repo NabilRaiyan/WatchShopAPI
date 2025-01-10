@@ -6,6 +6,7 @@ import { ReviewEntity } from './entity/review.entity';
 import { UserEntity } from 'src/user/entity';
 import { ProductEntity } from 'src/product/entity';
 
+// review module
 @Module({
   imports: [
     TypeOrmModule.forFeature([ReviewEntity, UserEntity, ProductEntity]),
