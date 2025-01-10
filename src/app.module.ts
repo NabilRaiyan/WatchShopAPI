@@ -14,6 +14,7 @@ import { UploadModule } from './supabase_auth/upload.module';
 import { ConfigModule } from '@nestjs/config';
 import { BrandModule } from './brand/brand.module';
 
+// app module
 @Module({
   imports: [
     TypeOrmModule.forRoot({
