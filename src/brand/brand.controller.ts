@@ -19,7 +19,7 @@ import { BrandService } from './brand.service';
 export class BrandController {
   constructor(private readonly brandService: BrandService) {}
 
-  // adding brand
+  // adding new brand
   @UseGuards(AuthGuard('jwt'))
   @Post('add-brand')
   @HttpCode(HttpStatus.CREATED)
