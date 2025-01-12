@@ -21,7 +21,7 @@ import { CartItemDto } from './cart.dto';
 export class CartItemController {
   constructor(private readonly cartItemService: CartItemService) {}
 
-  // insert cart item
+  // insert cart items
   @UseGuards(AuthGuard('jwt'))
   @Post('insert-into-cart')
   @HttpCode(HttpStatus.CREATED)
